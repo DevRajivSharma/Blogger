@@ -10,9 +10,10 @@ export default function Post() {
     const { slug } = useParams();
     const navigate = useNavigate();
 
-    const userData = useSelector((state) => state.AuthReducer.userData);
-
-    const isAuthor = post && userData ? post.userId === userData.$id : false;
+    const userData = useSelector((state) => state.auth.userData);
+    console.log('post : ',post)
+    console.log('usrData:',userData);
+    const isAuthor = post && userData ? post.user_id === userData.$id : false;
 
     useEffect(() => {
         if (slug) {
@@ -31,15 +32,15 @@ export default function Post() {
             }
         });
     };
-
     return post ? (
         <div className="py-8">
             <Container>
                 <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
                     <img
-                        src={appwriteService.getFilePreview(post.featuredImage)}
+                        src={appwriteService.getFilePreview(post.p_images)}
                         alt={post.title}
                         className="rounded-xl"
+                        width={100}
                     />
 
                     {isAuthor && (
@@ -56,10 +57,11 @@ export default function Post() {
                     )}
                 </div>
                 <div className="w-full mb-6">
-                    <h1 className="text-2xl font-bold">{post.title}</h1>
+                    <h1 className="text-2xl font-bold">{post.p_title}</h1>
                 </div>
                 <div className="browser-css">
-                    {parse(post.content)}
+
+                    {post.p_post}
                 </div>
             </Container>
         </div>

@@ -34,12 +34,12 @@ class DB {
             );
         }
         catch (e) {
-            throw e;
+            console.log('database :: createPost :: error :', e);
         }
 
     }
 
-    async updatePost(slug,{p_title,p_post,status,user_id,p_images}){
+    async updatePost(slug,{p_title,p_post,status,p_images}){
         try {
             return await this.databases.updateDocument(
                 env_conf.appwrite_database_id, // databaseId
@@ -75,7 +75,7 @@ class DB {
 
     async listPost(query=[Query.equal("status","active")]) {
         try {
-            console.log('Inside Listpost')
+            // console.log('Inside Listpost')
             return await this.databases.listDocuments(
                 env_conf.appwrite_database_id, // databaseId
                 env_conf.appwrite_collection_id, // collectionId

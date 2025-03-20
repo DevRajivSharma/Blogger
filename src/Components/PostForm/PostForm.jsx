@@ -16,11 +16,12 @@ export default function PostForm({ post }) {
     });
 
     const navigate = useNavigate();
-    const userData = useSelector((state) => state.AuthReducer.userData);
+    const userData = useSelector((state) => state.auth.userData);
 
     const submit = async (data) => {
+        console.log(data);
         if (post) {
-            const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null;
+            const file = data.p_images[0] ? await appwriteService.uploadFile(data.p_images[0]) : null;
 
             if (file) {
                 appwriteService.deleteFile(post.images);
@@ -28,19 +29,20 @@ export default function PostForm({ post }) {
 
             const dbPost = await appwriteService.updatePost(post.$id, {
                 ...data,
-                images: file ? file.$id : undefined,
+                p_images: file ? file.$id : undefined,
             });
 
             if (dbPost) {
                 navigate(`/post/${dbPost.$id}`);
             }
         } else {
-            const file = await appwriteService.uploadFile(data.image[0]);
+            console.log(data)
+            const file = await appwriteService.uploadFile(data.p_images[0]);
 
             if (file) {
                 const fileId = file.$id;
                 data.p_images = fileId;
-                const dbPost = await appwriteService.createPost({ ...data, userId: userData.$id });
+                const dbPost = await appwriteService.createPost({ ...data, user_id: userData.$id });
 
                 if (dbPost) {
                     navigate(`/post/${dbPost.$id}`);
@@ -88,7 +90,8 @@ export default function PostForm({ post }) {
                         setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
                     }}
                 />
-                <RTE label="p_post :" name="p_post" control={control} defaultValue={getValues("p_post")} />
+                <textarea className={'bg-white text-black p-2 w-full'} {...register("p_post", { required: true })} />
+                {/*<RTE label="p_post :" name="p_post" control={control} defaultValue={getValues("p_post")} />*/}
             </div>
             <div className="w-1/3 px-2">
                 <Input

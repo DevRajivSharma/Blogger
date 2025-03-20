@@ -26,17 +26,17 @@ const router = createBrowserRouter([
             {
                 path: "/login",
                 element: (
-                    <AuthLayout authenticated={false}>
+                   // <AuthLayout authenticated={false}>
                         <Login />
-                    </AuthLayout>
+                    //</AuthLayout>
                 ),
             },
             {
                 path: "/signup",
                 element: (
-                    <AuthLayout authenticated={false}>
+                    // <AuthLayout >
                         <SignUp />
-                    </AuthLayout>
+                     // </AuthLayout>
                 ),
             },
             {
@@ -76,10 +76,10 @@ const router = createBrowserRouter([
 
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-      <Provider store={store}>
-          <RouterProvider router={router} />
-          {/*<App/>*/}
-      </Provider>
-  </StrictMode>,
+    <StrictMode>
+        <Provider store={store}>
+            <RouterProvider router={router} />
+            {/*<App/>*/}
+        </Provider>
+    </StrictMode>,
 )

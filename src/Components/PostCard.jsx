@@ -8,7 +8,7 @@ function PostCard({
     p_images
     }) {
     return (
-        <Link to={`/posts/${$id}`}>
+        <Link to={`/post/${$id}`}>
             <div
                 className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
 

@@ -6,6 +6,7 @@ function Home() {
     const [Posts, setPosts] = useState([])
 
     useEffect(() => {
+        console.log('reload')
             appwriteService.listPost()
                 .then(Posts => {
                     if (Posts){

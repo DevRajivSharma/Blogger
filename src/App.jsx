@@ -7,14 +7,15 @@ import { Outlet } from "react-router-dom";
 import Loader from "./Components/Loader.jsx";
 
 function App() {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
 
     useEffect(() => {
         auth.getCurrentUser()
             .then((userData) => {
                 if (userData) {
-                    dispatch(login({userData}))
+                    console.log('userData : ',userData)
+                    dispatch(login(userData))
                 } else {
                     console.log('Logged Out')
                     dispatch(logout())
