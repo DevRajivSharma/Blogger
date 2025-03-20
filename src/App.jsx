@@ -3,26 +3,25 @@ import { useDispatch } from 'react-redux'
 import auth from './appwrite/auth.js'
 import {login,logout} from './feature/authSlice.js'
 import {Footer, Header} from "./Components/index.js";
-import {Outlet} from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Loader from "./Components/Loader.jsx";
 
 function App() {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    auth.getCurrentUser()
-        .then((userData) => {
-          if (userData) {
-            dispatch(login({userData}))
-            setLoading(false)
-          }
-          else {
-            dispatch(logout())
-          }
-        })
-        .finally(() => setLoading(false))
-  });
+    useEffect(() => {
+        auth.getCurrentUser()
+            .then((userData) => {
+                if (userData) {
+                    dispatch(login({userData}))
+                } else {
+                    console.log('Logged Out')
+                    dispatch(logout())
+                }
+            })
+            .finally(() => setLoading(false))
+    }, [dispatch])
 
    if (loading) {
      return (

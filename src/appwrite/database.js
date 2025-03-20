@@ -1,4 +1,4 @@
-import {Client, Databases ,Storage,ID} from "appwrite";
+import {Client, Databases, Storage, ID, Query} from "appwrite";
 import env_conf from "../env_conf/env_conf.js";
 
 class DB {
@@ -73,8 +73,9 @@ class DB {
 
     }
 
-    async listPost(query=[]) {
+    async listPost(query=[Query.equal("status","active")]) {
         try {
+            console.log('Inside Listpost')
             return await this.databases.listDocuments(
                 env_conf.appwrite_database_id, // databaseId
                 env_conf.appwrite_collection_id, // collectionId

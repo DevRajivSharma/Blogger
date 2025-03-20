@@ -9,7 +9,7 @@ function AuthLayout({
 {
     const [loader, setLoader] = useState(true)
     const navigate = useNavigation();
-    const authStatus = useSelector((state) => state.auth.status);
+    const authStatus = useSelector((state) => state.AuthReducer.status);
 
     useEffect(() => {
         if (authenticated && authStatus !== authenticated) {

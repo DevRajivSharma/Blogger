@@ -10,7 +10,6 @@ class Auth {
                 .setEndpoint(env_conf.appwrite_url) // Your API Endpoint
                 .setProject(env_conf.appwrite_project_id); // Your project ID
             this.account = new Account(this.client);
-            console.log('IDS',env_conf.appwrite_project_id);
         }
         catch (e) {
             console.log('Auth.js :: constructor :: Error:', e);
