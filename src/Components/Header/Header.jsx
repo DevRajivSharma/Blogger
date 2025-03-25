@@ -25,8 +25,8 @@ function Header() {
             active: !authStatus,
         },
         {
-            name: "All Posts",
-            slug: "/all-posts",
+            name: "My Posts",
+            slug: "/my-posts",
             active: authStatus,
         },
         {
@@ -36,10 +36,11 @@ function Header() {
         },
     ]
     return (
-        <div className={'flex p-2 justify-between bg-gray-500'}>
+        <div className={'sticky top-0 w-full z-1'}>
+        <div className={'flex p-2 justify-between  bg-[#404248]'}>
             <NavBar navItems={navItems} />
-
             {authStatus && <Logout className=""/>}
+        </div>
         </div>
     );
 }

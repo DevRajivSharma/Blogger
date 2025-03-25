@@ -4,7 +4,7 @@ import {Controller } from 'react-hook-form';
 import env_conf from "../env_conf/env_conf.js";
 export default function RTE({name, label,control, defaultValue =""}) {
     return (
-        <div className='w-full'>
+        <div className='w-full mb-2'>
             {label && <label className='inline-block mb-1 pl-1'>{label}</label>}
 
             <Controller

@@ -25,13 +25,12 @@ function Login() {
                         .then((userData) => {
                             setBtnLoader(false)
                             if (userData) {
-                                rememberMe?dispatch(storeLogin(userData)):null;
+                                dispatch(storeLogin(userData));
                                 userData.emailVerification?dispatch((verifyStatus()))
-                                    :
+                                    :null;
                                 navigate('/');
                             }
                             else {
-
                                 setError('Incorrect email or password')
                             }
                         })
@@ -46,9 +45,9 @@ function Login() {
 
     return (
         <section className=" bg-[#212121]">
-            <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto  md:h-screen lg:py-0">
+            <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto min-h-165 lg:py-0">
                 <div
-                    className="w-full rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700">
+                    className="lg:w-1/4 md:w-1/2.5  rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                         <h1 className="text-xl font-bold leading-tight  md:text-2xl ">
                             Sign in to your account
@@ -79,23 +78,23 @@ function Login() {
                                        })}
                                        />
                             </div>
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-start">
-                                    <div className="flex items-center h-5">
-                                        <input id="remember" aria-describedby="remember" type="checkbox"
-                                               className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                                               onClick={() => setRememberMe(!rememberMe)}
-                                               required=""/>
-                                    </div>
-                                    <div className="ml-3 text-sm">
-                                        <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">Remember
-                                            me</label>
-                                    </div>
-                                </div>
-                                <Link to="/signup"
-                                   className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot
-                                    password?</Link>
-                            </div>
+                            {/*<div className="flex items-center justify-between">*/}
+                            {/*    <div className="flex items-start">*/}
+                            {/*        <div className="flex items-center h-5">*/}
+                            {/*            <input id="remember" aria-describedby="remember" type="checkbox"*/}
+                            {/*                   className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"*/}
+                            {/*                   onClick={() => setRememberMe(!rememberMe)}*/}
+                            {/*                   required=""/>*/}
+                            {/*        </div>*/}
+                            {/*        <div className="ml-3 text-sm">*/}
+                            {/*            <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">Remember*/}
+                            {/*                me</label>*/}
+                            {/*        </div>*/}
+                            {/*    </div>*/}
+                            {/*    <Link to="/signup"*/}
+                            {/*       className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot*/}
+                            {/*        password?</Link>*/}
+                            {/*</div>*/}
 
                             <div >
                                 <p className=" text-center text-md text-red-600 ">
@@ -111,10 +110,8 @@ function Login() {
                                     : 'Log in'}
                             </button>
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                Don’t have an account yet? <a href="#"
-                                                              className="font-medium text-primary-600 hover:underline dark:text-primary-500">
-                                Sign up
-                            </a>
+                                Don’t have an account yet? <Link to="/signup"
+                                                                 className="font-medium text-primary-600 hover:underline text-primary-500">Sign up</Link>
                             </p>
                         </form>
                     </div>

@@ -10,7 +10,7 @@ import {verifyStatus} from "../feature/authSlice.js"
 function Home() {
     const [Posts, setPosts] = useState([])
     useEffect(() => {
-        appwriteService.listPost()
+        appwriteService.listPost([])
             .then(Posts => {
                 if (Posts){
                     setPosts(Posts.documents);
@@ -19,7 +19,7 @@ function Home() {
     },[])
     if (Posts.length === 0) {
         return (
-            <div className={'h-100 flex items-center'}><Loader/></div>
+            <div className={'h-165 flex items-center'}><Loader/></div>
         )
     }
     return (

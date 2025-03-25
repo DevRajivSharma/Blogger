@@ -1,7 +1,7 @@
 import { useState,useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import auth from './appwrite/auth.js'
-import {login,logout} from './feature/authSlice.js'
+import {login, logout, verifyStatus} from './feature/authSlice.js'
 import {Footer, Header} from "./Components/index.js";
 import { Outlet } from "react-router-dom";
 import Loader from "./Components/Loader.jsx";
@@ -16,6 +16,7 @@ function App() {
                 if (userData) {
                     console.log('userData : ',userData)
                     dispatch(login(userData))
+                    userData.emailVerification?dispatch(verifyStatus()):null;
                 } else {
                     dispatch(logout())
                 }

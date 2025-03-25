@@ -108,7 +108,7 @@ class Auth {
 
     async createEmailVerification(){
         this.account.createVerification(
-            'http://localhost:5173/verify'
+            'https://rajiv-blogger.netlify.app/verify'
         )
         .then((result) => {
             return result

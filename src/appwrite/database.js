@@ -20,6 +20,7 @@ class DB {
 
     async createPost({p_title, slug, p_post, status, user_id, p_images}){
         try {
+            console.log(typeof p_post);
             return await this.databases.createDocument(
                 env_conf.appwrite_database_id, // databaseId
                 env_conf.appwrite_collection_id, // collectionId
@@ -73,8 +74,9 @@ class DB {
 
     }
 
-    async listPost(query=[Query.equal("status","active")]) {
+    async listPost(query=[Query.equal("status","active"),...query]) {
         try {
+            console.log(query);
             // console.log('Inside Listpost')
             return await this.databases.listDocuments(
                 env_conf.appwrite_database_id, // databaseId
