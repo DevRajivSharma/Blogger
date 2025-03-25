@@ -13,7 +13,8 @@ import AllPosts from "./Pages/AllPost.jsx"
 import AddPost from "./Pages/AddPost.jsx"
 import EditPost from "./Pages/EditPost.jsx"
 import Home from "./Pages/Home.jsx"
-
+import Verify from "./Components/Verify.jsx";
+import CheckEmail from "./Components/CheckEmail.jsx";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -70,6 +71,14 @@ const router = createBrowserRouter([
                 path: "/post/:slug",
                 element: <Post />,
             },
+            {
+                path:"/verify",
+                element: <Verify/>
+            },
+            {
+                path:"/checkMail",
+                element: <CheckEmail/>
+            }
         ],
     },
 ])
@@ -79,7 +88,6 @@ createRoot(document.getElementById('root')).render(
     <StrictMode>
         <Provider store={store}>
             <RouterProvider router={router} />
-            {/*<App/>*/}
         </Provider>
     </StrictMode>,
 )

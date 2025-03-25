@@ -1,4 +1,4 @@
-import { Client, Account ,ID} from "appwrite";
+import { Client, Account ,ID , AuthenticationFactor} from "appwrite";
 import env_conf from "../env_conf/env_conf.js";
 
 class Auth {
@@ -18,18 +18,26 @@ class Auth {
 
     async createAccount({email, password, name}){
         try {
+            console.log("Creating account");
             this.account.create(
                 ID.unique() ,// userId
                 email, // email
                 password, // password
                 name // name (optional)
             )
-                .then( (response) => {
-                    console.log('Appwrite :: auth :: createAccount :: response :',response)
-                    return this.login(email, password); // Success
-                }, function (error) {
-                    throw error // Failure
-                });
+            .then( () => {
+                this.login({email, password})
+                    .then(() => {
+                        this.createEmailVerification()
+                            .then((response) => {
+                                return response;
+                            })
+                    },(error) =>{
+                        console.log('createAccount :: login :: Error:', error);
+                    })
+            }, function (error) {
+                throw error // Failure
+            });
         }
         catch(error){
             console.log('Auth.js :: createAccount :: Error:',error);
@@ -74,6 +82,54 @@ class Auth {
 
     }
 
+    async sendOTP({email}){
+        try {
+            return await this.account.createEmailToken(
+                ID.unique(),
+                email
+            );
+        }
+        catch(error){
+            console.log('Auth.js :: sendOTP :: Error:',error);
+        }
+    }
+
+    async verifyOTP({id,otp}){
+        try {
+            return await this.account.createSession(
+                id,
+                otp
+            );
+        }
+        catch(error){
+            console.log('Auth.js :: verifyOTP :: Error:',error);
+        }
+    }
+
+    async createEmailVerification(){
+        this.account.createVerification(
+            'http://localhost:5173/verify'
+        )
+        .then((result) => {
+            return result
+        })
+    }
+
+    async updateVerification({userId,secret}){
+        try {
+            console.log(userId);
+            console.log(secret);
+            this.account.updateVerification(userId, secret)
+                .then( (response) => {
+                    return response; // Success
+                }, function (error) {
+                    console.log(error); // Failure
+                });
+        }
+        catch(error){
+            console.log('Auth.js :: createSession :: Error:',error);
+        }
+    }
 
 }
 

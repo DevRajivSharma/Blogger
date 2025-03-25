@@ -1,40 +1,35 @@
 import React,{useState,useEffect} from 'react';
 import {PostCard,Container} from "../Components";
 import appwriteService from "../appwrite/database.js"
+import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from "react-router-dom";
+import Loader from "../Components/Loader.jsx";
+import {verifyStatus} from "../feature/authSlice.js"
+
 
 function Home() {
     const [Posts, setPosts] = useState([])
-
     useEffect(() => {
-        console.log('reload')
-            appwriteService.listPost()
-                .then(Posts => {
-                    if (Posts){
-                        setPosts(Posts.documents);
-                    }
-                })
+        appwriteService.listPost()
+            .then(Posts => {
+                if (Posts){
+                    setPosts(Posts.documents);
+                }
+            })
     },[])
     if (Posts.length === 0) {
         return (
-            <div className="w-full py-8 mt-4 text-center">
-                <Container>
-                    <div className="flex flex-wrap">
-                        <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold hover:text-gray-500">
-                                Login to read Posts
-                            </h1>
-                        </div>
-                    </div>
-                </Container>
-            </div>
+            <div className={'h-100 flex items-center'}><Loader/></div>
         )
     }
     return (
-        <div className='w-full py-8'>
+        <div className='w-full  py-8'>
+
             <Container>
-                <div className='flex flex-wrap'>
+
+                <div className='flex  flex-wrap md:flex-row sm:flex-col justify-center'>
                     {Posts.map((post) => (
-                        <div key={post.$id} className='p-2 w-1/4'>
+                        <div key={post.$id} className='p-2 md:w-1/2 lg:w-1/4 w-full '>
                             <PostCard {...post} />
                         </div>
                     ))}

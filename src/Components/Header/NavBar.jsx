@@ -7,8 +7,8 @@ function NavBar({ navItems = [] }) {
     const navigate = useNavigate();
 
     return (
-        <Container>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+
+            <nav className="navbar   navbar-expand-lg navbar-dark bg-dark">
                 <ul className="navbar-nav flex ">
                     {navItems.map((item) =>
                         item.active ? (
@@ -24,7 +24,7 @@ function NavBar({ navItems = [] }) {
 
                 </ul>
             </nav>
-        </Container>
+
     );
 }
 

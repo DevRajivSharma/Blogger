@@ -1,6 +1,6 @@
 import React from 'react';
 import {Logout,NavBar} from "..";
-import BloggerLogo from "../../assets/BloggerLogo.jsx"
+import BloggerLogo from "../BloggerLogo.jsx"
 import {useSelector} from "react-redux";
 import Button from "../Button.jsx";
 import Container from "../Container/Container.jsx";
@@ -36,26 +36,9 @@ function Header() {
         },
     ]
     return (
-        <div className={'flex '}>
+        <div className={'flex p-2 justify-between bg-gray-500'}>
             <NavBar navItems={navItems} />
-            {/*{navItems}*/}
-            {/*<Container>*/}
-            {/*    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">*/}
-            {/*        <ul className="navbar-nav">*/}
-            {/*            {navItems.map((item) =>*/}
-            {/*                item.active ? (*/}
-            {/*                    <li key={item.name}>*/}
-            {/*                        <button*/}
-            {/*                            onClick={() => navigate(item.slug)}*/}
-            {/*                            className='inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'*/}
-            {/*                        >{item.name}</button>*/}
-            {/*                    </li>*/}
-            {/*                ) : null*/}
-            {/*            )}*/}
 
-            {/*        </ul>*/}
-            {/*    </nav>*/}
-            {/*</Container>*/}
             {authStatus && <Logout className=""/>}
         </div>
     );

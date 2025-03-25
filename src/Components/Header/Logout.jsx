@@ -13,7 +13,7 @@ function Logout() {
             })
     }
     return (
-        <div>
+        <div >
             <button
                 className="btn bg-red-600 p-2 rounded-sm"
                 onClick={OnLogout}>

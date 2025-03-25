@@ -33,25 +33,26 @@ export default function Post() {
         });
     };
     return post ? (
-        <div className="py-8">
-            <Container>
-                <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
+        <div className="py-8 ">
+            <Container className="border p-4 rounded-xl ">
+                <div className="w-full flex justify-between mb-4 relative border-gray-100 rounded-xl p-2 ">
                     <img
                         src={appwriteService.getFilePreview(post.p_images)}
                         alt={post.title}
-                        className="rounded-xl"
-                        width={100}
+                        className="rounded-xl "
                     />
 
                     {isAuthor && (
                         <div className="absolute right-6 top-6">
                             <Link to={`/edit-post/${post.$id}`}>
-                                <Button bgColor="bg-green-500" className="mr-3">
+                                <Button bgColor="bg-green-500" className="mr-3 rounded
+                                 text-black text-lg px-2">
                                     Edit
                                 </Button>
                             </Link>
-                            <Button bgColor="bg-red-500" onClick={deletePost}>
-                                Delete
+                            <Button bgColor={'hover:bg-gray-300 bg-gray-200 text-lg text-[#eb0505] rounded px-2'} onClick={deletePost}>
+                                Delete&ensp;
+                                <i className="fa-solid fa-trash text-[#eb0505]" ></i>
                             </Button>
                         </div>
                     )}
@@ -61,7 +62,7 @@ export default function Post() {
                 </div>
                 <div className="browser-css">
 
-                    {post.p_post}
+                    {parse(post.p_post)}
                 </div>
             </Container>
         </div>

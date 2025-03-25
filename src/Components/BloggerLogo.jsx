@@ -3,7 +3,7 @@ import React from 'react';
 function BloggerLogo() {
     return (
         <div>
-            Logo
+            <img src="../assets/blogger.png" alt="Blogger "/>
         </div>
     );
 }

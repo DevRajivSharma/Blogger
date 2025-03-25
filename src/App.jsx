@@ -17,7 +17,6 @@ function App() {
                     console.log('userData : ',userData)
                     dispatch(login(userData))
                 } else {
-                    console.log('Logged Out')
                     dispatch(logout())
                 }
             })
@@ -26,12 +25,14 @@ function App() {
 
    if (loading) {
      return (
-        <Loader/>
+        <div className={'bg-[#212121]  w-screen h-screen flex items-center'}>
+            <Loader/>
+        </div>
      )
    }
    else {
      return (
-         <div className={'bg-[#212121] h-screen w-screen text-white'}>
+         <div className={'bg-[#212121]  w-screen h-screen overflow-y-auto text-white'}>
           <Header/>
             <Outlet/>
           <Footer/>

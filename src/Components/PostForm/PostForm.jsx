@@ -5,6 +5,7 @@ import appwriteService from "../../appwrite/database.js";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+
 export default function PostForm({ post }) {
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
         defaultValues: {
@@ -73,7 +74,7 @@ export default function PostForm({ post }) {
     }, [watch, slugTransform, setValue]);
 
     return (
-        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
+        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap md:flex-row sm:flex-col">
             <div className="w-2/3 px-2">
                 <Input
                     label="Title :"
@@ -90,8 +91,9 @@ export default function PostForm({ post }) {
                         setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
                     }}
                 />
-                <textarea className={'bg-white text-black p-2 w-full'} {...register("p_post", { required: true })} />
-                {/*<RTE label="p_post :" name="p_post" control={control} defaultValue={getValues("p_post")} />*/}
+                {/*<textarea className={'bg-white text-black p-2 w-full'} {...register("p_post", { required: true })} />*/}
+                <RTE label="p_post :" name="p_post" control={control} defaultValue={getValues("p_post")}
+                     {...register("p_post", { required: true })}/>
             </div>
             <div className="w-1/3 px-2">
                 <Input
@@ -116,7 +118,7 @@ export default function PostForm({ post }) {
                     className="mb-4"
                     {...register("status", { required: true })}
                 />
-                <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
+                <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full rounded p-2">
                     {post ? "Update" : "Submit"}
                 </Button>
             </div>
